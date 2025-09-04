@@ -1,5 +1,4 @@
 const HistoryDisplay = ({ history }) => {
-
     const historyLast3Items = history.slice(-3).reverse();
 
     return (

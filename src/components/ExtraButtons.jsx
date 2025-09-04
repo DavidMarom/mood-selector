@@ -1,4 +1,4 @@
-const MoodSelector = ({ handleReset, handleChooseRandomMood }) => {
+const ExtraButtons = ({ handleReset, handleChooseRandomMood }) => {
 
     return (
         <div className="mood-buttons-container">
@@ -8,6 +8,4 @@ const MoodSelector = ({ handleReset, handleChooseRandomMood }) => {
     );
 };
 
-
-
-export default MoodSelector;
+export default ExtraButtons;

@@ -1,11 +1,8 @@
 import { useState } from 'react';
 import './App.css';
 import data from './data.js';
-import MoodSelector from './components/MoodSelector.jsx';
-import CurrMood from './components/CurrMood.jsx';
-import StatusDisplay from './components/StatusDisplay.jsx';
-import ExtraButtons from './components/ExtraButoons.jsx';
-import HistoryDisplay from './components/HistoryDisplay.jsx';
+
+import { MoodSelector, CurrMood, StatusDisplay, ExtraButtons, HistoryDisplay } from './components';
 
 function App() {
   const [currentMood, setCurrentMood] = useState('neutral');
