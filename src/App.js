@@ -1,23 +1,39 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import data from './data.js';
+import MoodSelector from './components/MoodSelector.jsx';
+import CurrMood from './components/CurrMood.jsx';
+import StatusDisplay from './components/StatusDisplay.jsx';
+import ExtraButtons from './components/ExtraButoons.jsx';
+import HistoryDisplay from './components/HistoryDisplay.jsx';
 
 function App() {
+  const [currentMood, setCurrentMood] = useState('neutral');
+  const [dataState, setDataState] = useState(data);
+  const [history, setHistory] = useState([]);
+
+  const handleMoodChange = (moodKey) => {
+    setCurrentMood(moodKey);
+    setDataState({ ...dataState, [moodKey]: { ...dataState[moodKey], count: dataState[moodKey].count + 1 } });
+    setHistory([...history, moodKey]);
+  };
+
+  const handleReset = () => { setCurrentMood('neutral'); setDataState(data); setHistory([]); };
+
+  const handleChooseRandomMood = () => {
+    const moods = Object.keys(dataState);
+    const randomMood = moods[Math.floor(Math.random() * moods.length)];
+    handleMoodChange(randomMood);
+    setHistory([...history, randomMood]);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CurrMood currentMood={currentMood} data={data} />
+      <MoodSelector data={dataState} handleMoodChange={handleMoodChange} />
+      <StatusDisplay data={dataState} />
+      <ExtraButtons handleReset={handleReset} handleChooseRandomMood={handleChooseRandomMood} />
+      <HistoryDisplay history={history} />
     </div>
   );
 }
